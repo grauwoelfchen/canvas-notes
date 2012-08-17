@@ -36,15 +36,11 @@ module Canvas
     haml :rss, :layout => false
   end
 
-  get '/home' do
-    haml :home
-  end
-
   get '/' do
     path = recent_file_path
     raw = File.read(path)
     @text = convert(raw)
-    haml :page
+    haml :file
   end
 
   get '/:file' do
@@ -52,6 +48,6 @@ module Canvas
     halt 404, 'Not found' unless File.exist?(path)
     raw = File.read(path)
     @text = convert(raw)
-    haml :page
+    haml :file
   end
 end
